@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     [Header("---캐릭터")]
     public GameObject player;
     public GameObject enemy;
+
+    public GameObject selectObj;
     public GameObject countdownObj;
 
     public Sprite[] rockPaperScissors;
@@ -125,61 +127,65 @@ public class GameManager : MonoBehaviour
 
     public void Btn_CheckResult(int _num)
     {
-        StopCoroutine(Play_WaitVoice());
-        switch (_num)
+        if(status == Status.Play)
         {
-            case 0:
-                switch (enemyAnswer)
-                {
-                    case AnswerStates.Scissors:
-                        isWin = true;
-                        break;
-                    case AnswerStates.Paper:
-                        isWin = false;
-                        break;
-                }
-                break;
-            case 1:
-                switch (enemyAnswer)
-                {
-                    case AnswerStates.Rock:
-                        isWin = false;
-                        break;
-                    case AnswerStates.Paper:
-                        isWin = true;
-                        break;
-                }
-                break;
-            case 2:
-                switch (enemyAnswer)
-                {
-                    case AnswerStates.Rock:
-                        isWin = true;
-                        break;
-                    case AnswerStates.Scissors:
-                        isWin = false;
-                        break;
-                }
-                break;
-        }
+            StopCoroutine(Play_WaitVoice());
+            switch (_num)
+            {
+                case 0:
+                    switch (enemyAnswer)
+                    {
+                        case AnswerStates.Scissors:
+                            isWin = true;
+                            break;
+                        case AnswerStates.Paper:
+                            isWin = false;
+                            break;
+                    }
+                    break;
+                case 1:
+                    switch (enemyAnswer)
+                    {
+                        case AnswerStates.Rock:
+                            isWin = false;
+                            break;
+                        case AnswerStates.Paper:
+                            isWin = true;
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (enemyAnswer)
+                    {
+                        case AnswerStates.Rock:
+                            isWin = true;
+                            break;
+                        case AnswerStates.Scissors:
+                            isWin = false;
+                            break;
+                    }
+                    break;
+            }
 
-        enemy.GetComponent<Enemy>().resultImg.sprite = rockPaperScissors[(int)enemyAnswer];
+            enemy.GetComponent<Enemy>().resultImg.sprite = rockPaperScissors[(int)enemyAnswer];
 
-        if (isWin)
-        {
-            tm_result.text = "승리!";
-            StartCoroutine(CharaAttack(isWin, player, enemy));
-        }
-        else
-        {
-            tm_result.text = "패배!";
-            StartCoroutine(CharaAttack(isWin, enemy, player));
+            if (isWin)
+            {
+                tm_result.text = "승리!";
+                StartCoroutine(CharaAttack(isWin, player, enemy));
+            }
+            else
+            {
+                tm_result.text = "패배!";
+                StartCoroutine(CharaAttack(isWin, enemy, player));
+            }
         }
     }
 
     public void Init()
     {
         status = Status.Play;
+        selectObj.SetActive(false);
         GetComponent<AudioSource>().Stop();
         GetComponent<AudioSource>().Play();
         enemyAnswer = (AnswerStates)Random.Range(0, 2);

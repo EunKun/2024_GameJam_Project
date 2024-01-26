@@ -8,7 +8,6 @@ public class Anim_BattleStart : MonoBehaviour
     public Text tm;
 
     public AudioClip[] countdown_voice;
-    public GameObject selectBtn;
 
     private void OnEnable()
     {
@@ -18,7 +17,6 @@ public class Anim_BattleStart : MonoBehaviour
         }
 
         tm.text = "3";
-        selectBtn.SetActive(false);
     }
 
     private void Start()
@@ -50,6 +48,7 @@ public class Anim_BattleStart : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
+        GameManager.ins.selectObj.SetActive(true);
         gameObject.SetActive(false);
     }
 }

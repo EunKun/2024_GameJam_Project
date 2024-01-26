@@ -1306,7 +1306,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 19ee6f9429591d0488c28e0652cc9cab, type: 3}
   - {fileID: 8300000, guid: 5cde9236a9295744894bf842eb9fab05, type: 3}
   - {fileID: 8300000, guid: 053596e6119dd27428a12644ddc9b52c, type: 3}
-  selectBtn: {fileID: 1103687621}
 --- !u!95 &1212004878
 Animator:
   serializedVersion: 4
@@ -1693,6 +1692,7 @@ MonoBehaviour:
   status: 0
   player: {fileID: 919132147689732869}
   enemy: {fileID: 919132149467196624}
+  selectObj: {fileID: 1103687621}
   countdownObj: {fileID: 1212004869}
   rockPaperScissors:
   - {fileID: 21300000, guid: d24e7e0b75e1a244bb9687d6fd4315ef, type: 3}
