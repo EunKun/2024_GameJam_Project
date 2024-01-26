@@ -12,6 +12,7 @@ public enum AnswerStates
 
 public enum Status
 {
+    Start,
     Play,
     Result
 }
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     [Header("---Ä³¸¯ÅÍ")]
     public GameObject player;
     public GameObject enemy;
+    public GameObject countdownObj;
 
     public Sprite[] rockPaperScissors;
     public Image[] img_player_rockPaperScissors;
@@ -184,6 +186,7 @@ public class GameManager : MonoBehaviour
         enemy.GetComponent<Enemy>().Init();
         player.GetComponent<Player>().Init();
         tm_result.gameObject.SetActive(false);
+        StartCoroutine(countdownObj.GetComponent<Anim_BattleStart>().Start_Countdown());
         StartCoroutine(Play_WaitVoice());
     }
 
