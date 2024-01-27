@@ -15,7 +15,7 @@ namespace arrowgame
     {
         //arrow
         [SerializeField] private Arrows arrowState;
-        [SerializeField] private Text arrowVisual;
+        [SerializeField] private Image arrowImage;
         //speed
         [SerializeField] private float speed = 1f;
         public void setSpeed(float speed)
@@ -48,10 +48,13 @@ namespace arrowgame
         //set arrow
         private void SetArrow()
         {
-            if (arrowState == Arrows.up) arrowVisual.text = "up";
-            else if (arrowState == Arrows.down) arrowVisual.text = "down";
-            else if (arrowState == Arrows.left) arrowVisual.text = "left";
-            else if (arrowState == Arrows.right) arrowVisual.text = "right";
+            if (arrowState == Arrows.down) arrowImage.rectTransform.Rotate(0f,0f,180f);
+            else if (arrowState == Arrows.left) arrowImage.rectTransform.Rotate(0f, 0f, 90f);
+            else if (arrowState == Arrows.right) arrowImage.rectTransform.Rotate(0f, 0f, -90f);
+        }
+        private void disableArrow()
+        {
+            arrowImage.enabled = false;
         }
 
         public Arrows GetArrowData()
@@ -61,6 +64,7 @@ namespace arrowgame
 
         public void DeathEvent()
         {
+            disableArrow();
             speed = 0f;
             animator.SetTrigger("isDead");
             Destroy(gameObject,deadAnimationClip.length);
@@ -77,6 +81,7 @@ namespace arrowgame
 
         IEnumerator AttackEvent()
         {
+            disableArrow();
             Attack();
             yield return new WaitForSeconds(attackAnimationClip.length);
             Destroy(gameObject);
