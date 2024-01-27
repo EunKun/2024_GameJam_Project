@@ -15,7 +15,7 @@ namespace arrowgame
     {
         //arrow
         [SerializeField] private Arrows arrowState;
-        [SerializeField] private Image arrowImage;
+        [SerializeField] private GameObject ArrowObject;
         //speed
         [SerializeField] private float speed = 1f;
         public void AddSpeed(float speed)
@@ -58,13 +58,13 @@ namespace arrowgame
         //set arrow
         private void SetArrow()
         {
-            if (arrowState == Arrows.down) arrowImage.rectTransform.Rotate(0f,0f,180f);
-            else if (arrowState == Arrows.left) arrowImage.rectTransform.Rotate(0f, 0f, 90f);
-            else if (arrowState == Arrows.right) arrowImage.rectTransform.Rotate(0f, 0f, -90f);
+            if (arrowState == Arrows.down) ArrowObject.transform.Rotate(180f, 0f, 0f);
+            else if (arrowState == Arrows.left) ArrowObject.transform.Rotate(90f, 0f, 0f);
+            else if (arrowState == Arrows.right) ArrowObject.transform.Rotate(-90f, 0f, 0f);
         }
         private void disableArrow()
         {
-            arrowImage.enabled = false;
+            ArrowObject.SetActive(false);
         }
 
         public Arrows GetArrowData()
