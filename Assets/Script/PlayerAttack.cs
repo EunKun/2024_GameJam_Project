@@ -17,9 +17,15 @@ namespace arrowgame
 
         //Enemy Prefab
         GameObject enemyPrefab;
+
+        [SerializeField] AudioSource playerAudioSource;
+        [SerializeField] AudioClip attackAudioClip;
+        [SerializeField] AudioClip startAudioClip;
+
         // Start is called before the first frame update
         void Start()
         {
+            playerAudioSource.PlayOneShot(startAudioClip);
             enemyPrefab = Resources.Load<GameObject>("Prefabs/EnemyPrefab");
             boxCollider  = GetComponent<BoxCollider>();
             //playerAnimatorController = transform.Find("PlayerCharacter").GetComponent<Animator>();
@@ -55,6 +61,8 @@ namespace arrowgame
 
         private void DestroyEnemy(GameObject enemy)
         {
+            playerAudioSource.pitch = Random.Range(0.9f, 1.1f);
+            playerAudioSource.PlayOneShot(attackAudioClip) ;
             inBoxObject = null;
             enemyPrefab.GetComponent<ArrowGameEnemy>().AddSpeed(0.1f);
             enemy.GetComponent<ArrowGameEnemy>().DeathEvent();
