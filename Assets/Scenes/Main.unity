@@ -239,10 +239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -728,7 +728,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uAC00\uC704\uBC14\uC704\uBCF4\n(\uC539\uB355 \uC8FC\uC758)"
+  m_Text: "\uAC00\uC704\uBC14\uC704\uBCF4"
 --- !u!222 &965137807
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -833,6 +833,7 @@ GameObject:
   - component: {fileID: 1619230243}
   - component: {fileID: 1619230242}
   - component: {fileID: 1619230241}
+  - component: {fileID: 1619230244}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -912,6 +913,102 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619230239}
   m_CullTransparentMesh: 1
+--- !u!82 &1619230244
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619230239}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 97a3b36e0db03f348bea9edc3614a211, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1864817908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,8 +1114,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "<color=\"yellow>\uC7AC\uBBF8\uC788\uB294 \uBBF8\uB2C8 \uAC8C\uC784 \uCC9C\uAD6D</color>\n\n\uAE00\uB85C\uBC8C
     \uAC8C\uC784\uC7BC \uC720\uC800\uC5D0\uAC8C \uC2A4\uCCD0\uC9C0\uB098\uAC04 \n\uC9C0\uAE08\uAE4C\uC9C0
-    \uC788\uC744\uC9C0\uB3C4 \uBAA8\uB974\uB294 \uD480 3D \uC2A4\uD399\uD130\uD074\uD55C
-    \uBBF8\uB2C8\uAC8C\uC784\nfeat. \uB098\uB9CC \uC7AC\uBBF8\uC788\uC73C\uBA74 \uB3FC~"
+    \uC788\uC744\uC9C0\uB3C4 \uBAA8\uB974\uB294 \uD480 3D \uC2A4\uD399\uD130\uD074
+    \uBBF8\uB2C8\uAC8C\uC784"
 --- !u!222 &1864817913
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1130,7 +1227,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD0C0\uC774\uBC0D \uB9DE\uCD94\uAE30\n(\uBAB0!\uB8E8?)"
+  m_Text: "\uD0C0\uC774\uBC0D \uB9DE\uCD94\uAE30"
 --- !u!222 &1906172822
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1232,7 +1329,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: ArrowGameDemo
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2136284315

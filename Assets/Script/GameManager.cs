@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject enemy;
 
+    public GameObject resetObj;
     public GameObject selectObj;
     public GameObject countdownObj;
 
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Play_WaitVoice()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(5f);
 
         if (status == Status.Play)
         {
@@ -90,7 +91,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(Play_WaitVoice());
     }
 
-    IEnumerator CharaAttack(bool _win, GameObject _attacker, GameObject _taker)
+    IEnumerator CharaAttack(bool _win, bool _draw, GameObject _attacker, GameObject _taker)
     {
         Vector3 _pos;
         _pos = _attacker.transform.position;
@@ -100,6 +101,13 @@ public class GameManager : MonoBehaviour
         AudioClip _taker_die;
         
         status = Status.Result;
+
+        if(_draw)
+        {
+            tm_result.gameObject.SetActive(true);
+            resetObj.SetActive(true);
+            yield return null;
+        }
 
         if (_win)
         {
@@ -132,6 +140,7 @@ public class GameManager : MonoBehaviour
 
         _attacker.GetComponent<Animator>().Play("win");
         SoundManager.ins.PlaySound(_win, _atk_winner);
+        resetObj.SetActive(true);
     }
 
     public void Btn_CheckResult(int _num)
@@ -174,6 +183,10 @@ public class GameManager : MonoBehaviour
                             break;
                     }
                     break;
+                default:
+                    tm_result.text = "¹«½ÂºÎ!";
+                    StartCoroutine(CharaAttack(isWin, true, player, enemy));
+                    return;
             }
 
             enemy.GetComponent<Enemy>().resultImg.sprite = rockPaperScissors[(int)enemyAnswer];
@@ -181,12 +194,12 @@ public class GameManager : MonoBehaviour
             if (isWin)
             {
                 tm_result.text = "½Â¸®!";
-                StartCoroutine(CharaAttack(isWin, player, enemy));
+                StartCoroutine(CharaAttack(isWin, false, player, enemy));
             }
             else
             {
                 tm_result.text = "ÆÐ¹è!";
-                StartCoroutine(CharaAttack(isWin, enemy, player));
+                StartCoroutine(CharaAttack(isWin, false, enemy, player));
             }
         }
     }
@@ -194,6 +207,7 @@ public class GameManager : MonoBehaviour
     public void Init()
     {
         status = Status.Play;
+        resetObj.SetActive(false);
         selectObj.SetActive(false);
         GetComponent<AudioSource>().Stop();
         GetComponent<AudioSource>().Play();
@@ -201,6 +215,7 @@ public class GameManager : MonoBehaviour
         enemy.GetComponent<Enemy>().Init();
         player.GetComponent<Player>().Init();
         tm_result.gameObject.SetActive(false);
+        countdownObj.SetActive(true);
         StartCoroutine(countdownObj.GetComponent<Anim_BattleStart>().Start_Countdown());
         StartCoroutine(Play_WaitVoice());
     }
