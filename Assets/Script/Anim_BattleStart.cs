@@ -34,7 +34,7 @@ public class Anim_BattleStart : MonoBehaviour
         gameObject.SetActive(true);
         for (int i = countdown_voice.Length; i > 0; i--)
         {
-            GetComponent<AudioSource>().PlayOneShot(countdown_voice[i - 1]);
+            SoundManager.ins.PlaySound(SoundManager.ins._lowToneVoice + 0.1f, countdown_voice[i - 1]);
 
             if(i > 1)
             {

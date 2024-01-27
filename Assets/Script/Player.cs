@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
     public AudioClip voice_start;
@@ -19,6 +20,6 @@ public class Player : MonoBehaviour
     public void Init()
     {
         GetComponent<Animator>().Play("idle");
-        GetComponent<AudioSource>().PlayOneShot(voice_start);
+        SoundManager.ins.PlaySound(SoundManager.ins._normalToneVoice -0.15f, voice_start);
     }
 }

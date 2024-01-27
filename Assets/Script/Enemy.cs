@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
     public AudioClip voice_start;
@@ -31,6 +32,6 @@ public class Enemy : MonoBehaviour
         GetComponent<Animator>().Play("idle");
 
         yield return new WaitForSeconds(_waitTime);
-        GetComponent<AudioSource>().PlayOneShot(voice_start);
+        SoundManager.ins.PlaySound(SoundManager.ins._lowToneVoice, voice_start);
     }
 }

@@ -79,9 +79,10 @@ public class GameManager : MonoBehaviour
 
         if (status == Status.Play)
         {
-            GetComponent<AudioSource>().PlayOneShot(player.GetComponent<Player>().voice_wait);
+            SoundManager.ins.PlaySound(SoundManager.ins._normalToneVoice, player.GetComponent<Player>().voice_wait);
             yield return new WaitForSeconds(1f);
-            GetComponent<AudioSource>().PlayOneShot(enemy.GetComponent<Enemy>().voice_wait);
+
+            SoundManager.ins.PlaySound(SoundManager.ins._lowToneVoice, enemy.GetComponent<Enemy>().voice_wait);
             yield return new WaitForSeconds(1f);
         }
 
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
 
         AudioClip _atk_voice;
         AudioClip _atk_winner;
+        AudioClip _taker_die;
         
         status = Status.Result;
 
@@ -104,25 +106,32 @@ public class GameManager : MonoBehaviour
             _attacker.transform.position = _taker.transform.position + new Vector3(-1.4f, 0, 0);
             _atk_voice = player.GetComponent<Player>().voice_attack;
             _atk_winner = player.GetComponent<Player>().voice_winner;
+            _taker_die = enemy.GetComponent<Enemy>().voice_die;
         }
         else
         {
             _attacker.transform.position = _taker.transform.position + new Vector3(1.4f, 0, 0);
             _atk_voice = enemy.GetComponent<Enemy>().voice_attack;
             _atk_winner = enemy.GetComponent<Enemy>().voice_winner;
+            _taker_die = player.GetComponent<Player>().voice_die; 
         }
 
         _attacker.GetComponent<Animator>().Play("attack");
-        _audio.PlayOneShot(_swordswing);
-        _audio.PlayOneShot(_atk_voice);
-        yield return new WaitForSeconds(_attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * 0.7f);
+        SoundManager.ins.PlaySound(SoundManager.ins._sfx, _swordswing);
+        SoundManager.ins.PlaySound(_win, _atk_voice);
+
+        yield return new WaitForSeconds(_attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * 0.5f);
 
         _taker.GetComponent<Animator>().Play("die");
-        yield return new WaitForSeconds(_attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * 0.3f);
+        SoundManager.ins.PlaySound(_win, _taker_die);
+
+        yield return new WaitForSeconds(_attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * 0.5f);
 
         tm_result.gameObject.SetActive(true);
         _attacker.transform.position = _pos;
-        _audio.PlayOneShot(_atk_winner);
+
+        _attacker.GetComponent<Animator>().Play("win");
+        SoundManager.ins.PlaySound(_win, _atk_winner);
     }
 
     public void Btn_CheckResult(int _num)
