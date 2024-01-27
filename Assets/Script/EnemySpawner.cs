@@ -14,10 +14,14 @@ namespace arrowgame
 
         bool canSpawn;
 
+
+
+
         // Start is called before the first frame update
         void Start()
         {
             enemyPrefab = Resources.Load<GameObject>("Prefabs/EnemyPrefab");
+            enemyPrefab.GetComponent<ArrowGameEnemy>().SetSpeed(2f);
             canSpawn = true;
 
         }

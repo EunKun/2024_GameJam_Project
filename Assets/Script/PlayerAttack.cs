@@ -14,9 +14,13 @@ namespace arrowgame
         Arrows correctArrow;
 
         public Animator playerAnimatorController;
+
+        //Enemy Prefab
+        GameObject enemyPrefab;
         // Start is called before the first frame update
         void Start()
         {
+            enemyPrefab = Resources.Load<GameObject>("Prefabs/EnemyPrefab");
             boxCollider  = GetComponent<BoxCollider>();
             //playerAnimatorController = transform.Find("PlayerCharacter").GetComponent<Animator>();
         }
@@ -31,17 +35,17 @@ namespace arrowgame
                     playerAnimatorController.SetTrigger("isAttack");
                     DestroyEnemy(inBoxObject);
                 }
-                if (Input.GetKeyDown(KeyCode.DownArrow) && correctArrow == Arrows.down)
+                else if (Input.GetKeyDown(KeyCode.DownArrow) && correctArrow == Arrows.down)
                 {
                     playerAnimatorController.SetTrigger("isAttack");
                     DestroyEnemy(inBoxObject);
                 }
-                if (Input.GetKeyDown(KeyCode.LeftArrow) && correctArrow == Arrows.left)
+                else if (Input.GetKeyDown(KeyCode.LeftArrow) && correctArrow == Arrows.left)
                 {
                     playerAnimatorController.SetTrigger("isAttack");
                     DestroyEnemy(inBoxObject);
                 }
-                if (Input.GetKeyDown(KeyCode.RightArrow) && correctArrow == Arrows.right)
+                else if (Input.GetKeyDown(KeyCode.RightArrow) && correctArrow == Arrows.right)
                 {
                     playerAnimatorController.SetTrigger("isAttack");
                     DestroyEnemy(inBoxObject);
@@ -52,7 +56,8 @@ namespace arrowgame
         private void DestroyEnemy(GameObject enemy)
         {
             inBoxObject = null;
-            enemy.GetComponent<Enemy>().DeathEvent();
+            enemyPrefab.GetComponent<ArrowGameEnemy>().AddSpeed(0.1f);
+            enemy.GetComponent<ArrowGameEnemy>().DeathEvent();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -60,7 +65,7 @@ namespace arrowgame
             if (other.gameObject.tag == "Enemy")
             {
                 inBoxObject = other.gameObject;
-                correctArrow = other.GetComponent<Enemy>().GetArrowData();
+                correctArrow = other.GetComponent<ArrowGameEnemy>().GetArrowData();
             }
         }
 

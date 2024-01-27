@@ -9,9 +9,13 @@ namespace arrowgame
         BoxCollider playerCollider;
         [SerializeField] private float playerHealth = 3.0f;
         Animator playerAnimator;
+
+        //GameManager
+        ArrowGameController arrowGameController;
         // Start is called before the first frame update
         void Start()
         {
+            arrowGameController = GameObject.Find("ArrowGameController").GetComponent<ArrowGameController>();
             playerAnimator = GetComponent<Animator>();
         }
 
@@ -36,7 +40,10 @@ namespace arrowgame
         private void playerDeath()
         {
             playerAnimator.SetTrigger("isDead");
+            arrowGameController.StopArrowGame();
         }
+
+        
     }
 
 }

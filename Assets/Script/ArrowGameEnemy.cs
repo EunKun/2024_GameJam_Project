@@ -11,25 +11,35 @@ namespace arrowgame
         up, down, left, right
     }
 
-    public class Enemy : MonoBehaviour
+    public class ArrowGameEnemy : MonoBehaviour
     {
         //arrow
         [SerializeField] private Arrows arrowState;
         [SerializeField] private Image arrowImage;
         //speed
         [SerializeField] private float speed = 1f;
-        public void setSpeed(float speed)
+        public void AddSpeed(float speed)
+        {
+            this.speed += speed;
+        }
+        public void SetSpeed(float speed)
         {
             this.speed = speed;
         }
-
         //animator
         [SerializeField] private Animator animator;
         private AnimationClip deadAnimationClip;
         private AnimationClip attackAnimationClip;
+
+
+        //GameManager
+        ArrowGameController arrowGameController;
+
         // Start is called before the first frame update
         void Start()
         {
+            arrowGameController = GameObject.Find("ArrowGameController").GetComponent<ArrowGameController>();
+
             //arrowVisual = transform.Find("ArrowVisualText");
             arrowState = (Arrows)Random.Range(0, 4);
             animator = GetComponent<Animator>();
@@ -67,6 +77,7 @@ namespace arrowgame
             disableArrow();
             speed = 0f;
             animator.SetTrigger("isDead");
+            arrowGameController.addScore(1);
             Destroy(gameObject,deadAnimationClip.length);
         }
 
