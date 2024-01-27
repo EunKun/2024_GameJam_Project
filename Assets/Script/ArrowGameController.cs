@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
 namespace arrowgame
@@ -36,12 +37,32 @@ namespace arrowgame
             enemySpawner.enabled = false;
             ScoreText.text = score.ToString();
         }
+
         public void addScore(int value)
         {
             this.score += value;
             //ScoreText.text = "Score : " + score.ToString();
         }
 
+        public void PauseGame()
+        {
+            if(Time.timeScale == 0f)
+            {
+                attackScript.enabled = true;
+                playerController.enabled = true;
+                enemySpawner.enabled = true;
+                Time.timeScale = 1f;
+
+            }
+            else
+            {
+                attackScript.enabled = false;
+                playerController.enabled = false;
+                enemySpawner.enabled = false;
+                Time.timeScale = 0f;
+            }
+
+        }
     }
 
 }
