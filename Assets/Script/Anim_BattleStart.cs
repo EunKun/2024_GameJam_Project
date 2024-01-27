@@ -27,7 +27,6 @@ public class Anim_BattleStart : MonoBehaviour
 
         for (int i = countdown_voice.Length; i > 0; i--)
         {
-            yield return new WaitForSeconds(1f);
             SoundManager.ins.PlaySound(SoundManager.ins._lowToneVoice + 0.1f, countdown_voice[i - 1]);
 
             if(i > 1)
@@ -35,11 +34,13 @@ public class Anim_BattleStart : MonoBehaviour
                 tm.text = (i - 1).ToString();
                 ani.Play("GameOne_Start");
             }
-            else
+            else if(i == 1)
             {
                 tm.gameObject.SetActive(false);
                 tm_start.gameObject.SetActive(true);
             }
+
+            yield return new WaitForSeconds(1f);
         }
 
         yield return new WaitForSeconds(1f);
