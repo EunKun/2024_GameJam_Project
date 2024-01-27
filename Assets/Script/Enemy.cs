@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     IEnumerator StartVoice(float _waitTime)
     {
         resultImg.sprite = _sprite;
+        resultImg.gameObject.SetActive(false);
         GetComponent<Animator>().Play("idle");
 
         yield return new WaitForSeconds(_waitTime);

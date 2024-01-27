@@ -30,12 +30,12 @@ public class GameManager : MonoBehaviour
     public GameObject enemy;
 
     public GameObject resetObj;
+    public GameObject mainBackObj;
     public GameObject selectObj;
     public GameObject countdownObj;
 
     public Sprite[] rockPaperScissors;
     public Image[] img_player_rockPaperScissors;
-
 
     [SerializeField] AudioSource _audio;
     public AudioClip _swordswing;
@@ -105,6 +105,8 @@ public class GameManager : MonoBehaviour
         {
             tm_result.gameObject.SetActive(true);
             resetObj.SetActive(true);
+            mainBackObj.SetActive(true);
+
             yield return null;
         }
         else
@@ -141,11 +143,14 @@ public class GameManager : MonoBehaviour
             _attacker.GetComponent<Animator>().Play("win");
             SoundManager.ins.PlaySound(_win, _atk_winner);
             resetObj.SetActive(true);
+            mainBackObj.SetActive(true);
         }
     }
 
     public void Btn_CheckResult(int _num)
     {
+        enemy.GetComponent<Enemy>().resultImg.gameObject.SetActive(true);
+        enemy.GetComponent<Enemy>().resultImg.sprite = rockPaperScissors[(int)enemyAnswer];
         if(status == Status.Play)
         {
             StopCoroutine(Play_WaitVoice());
@@ -160,6 +165,10 @@ public class GameManager : MonoBehaviour
                         case AnswerStates.Paper:
                             isWin = false;
                             break;
+                        case AnswerStates.Rock:
+                            tm_result.text = "公铰何!";
+                            StartCoroutine(CharaAttack(isWin, true, player, enemy));
+                            break;
                     }
                     break;
                 case 1:
@@ -170,6 +179,10 @@ public class GameManager : MonoBehaviour
                             break;
                         case AnswerStates.Paper:
                             isWin = true;
+                            break;
+                        case AnswerStates.Scissors:
+                            tm_result.text = "公铰何!";
+                            StartCoroutine(CharaAttack(isWin, true, player, enemy));
                             break;
                     }
                     break;
@@ -182,12 +195,12 @@ public class GameManager : MonoBehaviour
                         case AnswerStates.Scissors:
                             isWin = false;
                             break;
+                        case AnswerStates.Paper:
+                            tm_result.text = "公铰何!";
+                            StartCoroutine(CharaAttack(isWin, true, player, enemy));
+                            break;
                     }
                     break;
-                default:
-                    tm_result.text = "公铰何!";
-                    StartCoroutine(CharaAttack(isWin, true, player, enemy));
-                    return;
             }
 
             enemy.GetComponent<Enemy>().resultImg.sprite = rockPaperScissors[(int)enemyAnswer];
@@ -210,6 +223,7 @@ public class GameManager : MonoBehaviour
         status = Status.Play;
         resetObj.SetActive(false);
         selectObj.SetActive(false);
+        mainBackObj.SetActive(false);
         tm_result.gameObject.SetActive(false);
 
         GetComponent<AudioSource>().Stop();
