@@ -10,11 +10,15 @@ namespace arrowgame
         [SerializeField] private float playerHealth = 3.0f;
         Animator playerAnimator;
 
+        private AudioSource audioSource;
+        [SerializeField] AudioClip deathSound;
+        [SerializeField] AudioClip hitSound;
         //GameManager
         ArrowGameController arrowGameController;
         // Start is called before the first frame update
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             arrowGameController = GameObject.Find("ArrowGameController").GetComponent<ArrowGameController>();
             playerAnimator = GetComponent<Animator>();
         }
@@ -31,6 +35,7 @@ namespace arrowgame
         public void addToPlayerHealth(float value)
         {
             playerHealth += value;
+            audioSource.PlayOneShot(hitSound);
             if (playerHealth < 0f)
             {
                 playerDeath();
@@ -39,6 +44,7 @@ namespace arrowgame
         }
         private void playerDeath()
         {
+            audioSource.PlayOneShot(deathSound);
             playerAnimator.SetTrigger("isDead");
             arrowGameController.StopArrowGame();
         }
