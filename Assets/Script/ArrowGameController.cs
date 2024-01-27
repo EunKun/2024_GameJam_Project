@@ -15,6 +15,7 @@ namespace arrowgame
         [SerializeField] EnemySpawner enemySpawner;
 
         public Text ScoreText;
+        public Text ProcedureText;
         // Start is called before the first frame update
         void Start()
         {
@@ -42,7 +43,13 @@ namespace arrowgame
         public void addScore(int value)
         {
             this.score += value;
+            setProcedureBoard();
             //ScoreText.text = "Score : " + score.ToString();
+        }
+
+        public void setProcedureBoard()
+        {
+            ProcedureText.text = "처치 수: " + score.ToString() + "\n라이프 : " + playerController.getPlayerHealth().ToString();
         }
 
         public void PauseGame()

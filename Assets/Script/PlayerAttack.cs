@@ -66,7 +66,7 @@ namespace arrowgame
             playerAudioSource.pitch = Random.Range(0.9f, 1.1f);
             playerAudioSource.PlayOneShot(attackAudioClip) ;
             inBoxObject = null;
-            enemyPrefab.GetComponent<ArrowGameEnemy>().AddSpeed(0.1f);
+            enemyPrefab.GetComponent<ArrowGameEnemy>().AddSpeed(0.3f);
             enemy.GetComponent<ArrowGameEnemy>().DeathEvent();
         }
 

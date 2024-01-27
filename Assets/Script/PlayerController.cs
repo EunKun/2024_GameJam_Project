@@ -20,6 +20,7 @@ namespace arrowgame
         {
             audioSource = GetComponent<AudioSource>();
             arrowGameController = GameObject.Find("ArrowGameController").GetComponent<ArrowGameController>();
+            arrowGameController.setProcedureBoard();
             playerAnimator = GetComponent<Animator>();
         }
 
@@ -32,11 +33,16 @@ namespace arrowgame
         {
             playerHealth = value;
         }
+        public float getPlayerHealth()
+        {
+            return playerHealth;
+        }
         public void addToPlayerHealth(float value)
         {
             playerHealth += value;
             audioSource.PlayOneShot(hitSound);
-            if (playerHealth < 0f)
+            arrowGameController.setProcedureBoard();
+            if (playerHealth < 1f)
             {
                 playerDeath();
                 gameObject.GetComponent<BoxCollider>().enabled = false;
