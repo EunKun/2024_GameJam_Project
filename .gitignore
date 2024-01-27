@@ -10,3 +10,5 @@ Logs
 obj
 Packages
 Purchasing.Common.csproj
+Packages/packages-lock.json
+Packages
