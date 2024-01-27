@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
@@ -63,6 +64,11 @@ namespace arrowgame
             }
 
         }
-    }
 
+        public void LoadMain(string _scene)
+        {
+            if (!string.IsNullOrEmpty(_scene))
+                SceneManager.LoadScene(_scene);
+        }
+    }
 }

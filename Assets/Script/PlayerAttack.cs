@@ -22,6 +22,7 @@ namespace arrowgame
         [SerializeField] AudioClip attackAudioClip;
         [SerializeField] AudioClip startAudioClip;
 
+        [SerializeField] ParticleSystem attackEffect;
         // Start is called before the first frame update
         void Start()
         {
@@ -61,6 +62,7 @@ namespace arrowgame
 
         private void DestroyEnemy(GameObject enemy)
         {
+            attackEffect.Play();
             playerAudioSource.pitch = Random.Range(0.9f, 1.1f);
             playerAudioSource.PlayOneShot(attackAudioClip) ;
             inBoxObject = null;
