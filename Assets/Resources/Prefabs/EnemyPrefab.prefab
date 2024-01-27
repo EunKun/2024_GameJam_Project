@@ -1418,6 +1418,7 @@ GameObject:
   - component: {fileID: 7242336352862847727}
   - component: {fileID: 5960447390404763699}
   - component: {fileID: 7712081523518708836}
+  - component: {fileID: 2380340129647585900}
   m_Layer: 0
   m_Name: EnemyPrefab
   m_TagString: Enemy
@@ -1459,6 +1460,7 @@ MonoBehaviour:
   arrowState: 0
   arrowVisual: {fileID: 5856780062980658130}
   speed: 5
+  animator: {fileID: 0}
 --- !u!65 &5960447390404763699
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1488,6 +1490,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &2380340129647585900
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8518788634282821840}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 37aa4ac3d24dc5747b74f9085e17b59e, type: 3}
+  m_Controller: {fileID: 9100000, guid: ffb36ca82e6014e4c9d801e2181c4029, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8595138643003787173
 GameObject:
   m_ObjectHideFlags: 0

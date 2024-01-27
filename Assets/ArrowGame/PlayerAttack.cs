@@ -12,10 +12,13 @@ namespace arrowgame
         private GameObject inBoxObject;
 
         Arrows correctArrow;
+
+        public Animator playerAnimatorController;
         // Start is called before the first frame update
         void Start()
         {
-            boxCollider  = GetComponent<BoxCollider>(); 
+            boxCollider  = GetComponent<BoxCollider>();
+            //playerAnimatorController = transform.Find("PlayerCharacter").GetComponent<Animator>();
         }
 
         // Update is called once per frame
@@ -23,17 +26,33 @@ namespace arrowgame
         {
             if(inBoxObject != null)
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow) && correctArrow == Arrows.up) DestroyEnemy(inBoxObject);
-                if (Input.GetKeyDown(KeyCode.DownArrow) && correctArrow == Arrows.down) DestroyEnemy(inBoxObject);
-                if (Input.GetKeyDown(KeyCode.LeftArrow) && correctArrow == Arrows.left) DestroyEnemy(inBoxObject);
-                if (Input.GetKeyDown(KeyCode.RightArrow) && correctArrow == Arrows.right) DestroyEnemy(inBoxObject);
+                if (Input.GetKeyDown(KeyCode.UpArrow) && correctArrow == Arrows.up)
+                {
+                    playerAnimatorController.SetTrigger("isAttack");
+                    DestroyEnemy(inBoxObject);
+                }
+                if (Input.GetKeyDown(KeyCode.DownArrow) && correctArrow == Arrows.down)
+                {
+                    playerAnimatorController.SetTrigger("isAttack");
+                    DestroyEnemy(inBoxObject);
+                }
+                if (Input.GetKeyDown(KeyCode.LeftArrow) && correctArrow == Arrows.left)
+                {
+                    playerAnimatorController.SetTrigger("isAttack");
+                    DestroyEnemy(inBoxObject);
+                }
+                if (Input.GetKeyDown(KeyCode.RightArrow) && correctArrow == Arrows.right)
+                {
+                    playerAnimatorController.SetTrigger("isAttack");
+                    DestroyEnemy(inBoxObject);
+                }
             }
         }
 
         private void DestroyEnemy(GameObject enemy)
         {
             inBoxObject = null;
-            Destroy(enemy);
+            enemy.GetComponent<Enemy>().DeathEvent();
         }
 
         private void OnTriggerEnter(Collider other)
