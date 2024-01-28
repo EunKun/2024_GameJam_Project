@@ -151,6 +151,8 @@ public class GameManager : MonoBehaviour
     {
         enemy.GetComponent<Enemy>().resultImg.gameObject.SetActive(true);
         enemy.GetComponent<Enemy>().resultImg.sprite = rockPaperScissors[(int)enemyAnswer];
+        bool _draw = false;
+
         if(status == Status.Play)
         {
             StopCoroutine(Play_WaitVoice());
@@ -167,7 +169,8 @@ public class GameManager : MonoBehaviour
                             break;
                         case AnswerStates.Rock:
                             tm_result.text = "公铰何!";
-                            StartCoroutine(CharaAttack(isWin, true, player, enemy));
+                            _draw = true;
+                            StartCoroutine(CharaAttack(isWin, _draw, player, enemy));
                             break;
                     }
                     break;
@@ -182,7 +185,8 @@ public class GameManager : MonoBehaviour
                             break;
                         case AnswerStates.Scissors:
                             tm_result.text = "公铰何!";
-                            StartCoroutine(CharaAttack(isWin, true, player, enemy));
+                            _draw = true;
+                            StartCoroutine(CharaAttack(isWin, _draw, player, enemy));
                             break;
                     }
                     break;
@@ -197,7 +201,8 @@ public class GameManager : MonoBehaviour
                             break;
                         case AnswerStates.Paper:
                             tm_result.text = "公铰何!";
-                            StartCoroutine(CharaAttack(isWin, true, player, enemy));
+                            _draw = true;
+                            StartCoroutine(CharaAttack(isWin, _draw, player, enemy));
                             break;
                     }
                     break;
@@ -205,15 +210,18 @@ public class GameManager : MonoBehaviour
 
             enemy.GetComponent<Enemy>().resultImg.sprite = rockPaperScissors[(int)enemyAnswer];
 
-            if (isWin)
+            if(_draw == false)
             {
-                tm_result.text = "铰府!";
-                StartCoroutine(CharaAttack(isWin, false, player, enemy));
-            }
-            else
-            {
-                tm_result.text = "菩硅!";
-                StartCoroutine(CharaAttack(isWin, false, enemy, player));
+                if (isWin)
+                {
+                    tm_result.text = "铰府!";
+                    StartCoroutine(CharaAttack(isWin, false, player, enemy));
+                }
+                else
+                {
+                    tm_result.text = "菩硅!";
+                    StartCoroutine(CharaAttack(isWin, false, enemy, player));
+                }
             }
         }
     }
